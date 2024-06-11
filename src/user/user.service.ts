@@ -1,15 +1,17 @@
+import { injectable, inject } from "inversify";
 import { UserModel } from "./user.model";
-import { serviceLocator } from "../core/util/serviceLocator";
 import { IProductService, Product } from "../core/types/product.types";
 import { User, IUserService } from "../core/types/user.types";
+import { TYPES } from "../inversify.config";
 
+@injectable()
 export class UserService implements IUserService {
     private userModel: UserModel;
     private productService: IProductService;
 
-    constructor() {
+    constructor(@inject(TYPES.IProductService) productService: IProductService) {
         this.userModel = new UserModel();
-        this.productService = serviceLocator.get<IProductService>('IProductService');
+        this.productService = productService;
     }
 
     public getAllUsers(): User[] {

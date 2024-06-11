@@ -1,13 +1,14 @@
 import { Request, Response } from "express";
-import { serviceLocator } from "../core/util/serviceLocator";
+import { injectable, inject } from "inversify";
 import { IUserService } from "../core/types/user.types";
+import { TYPES } from "../inversify.config";
 
-
+@injectable()
 export class UserController {
     private userService: IUserService;
 
-    constructor() {
-        this.userService = serviceLocator.get<IUserService>('IUserService');
+    constructor(@inject(TYPES.IUserService) userService: IUserService) {
+        this.userService = userService;
     }
 
     public getAllUsers = (_req: Request, res: Response): void => {

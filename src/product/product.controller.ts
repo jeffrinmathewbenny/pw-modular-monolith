@@ -1,12 +1,14 @@
 import { Request, Response } from "express";
-import { serviceLocator } from "../core/util/serviceLocator";
+import { injectable, inject } from "inversify";
 import { IProductService } from "../core/types/product.types";
+import { TYPES } from "../inversify.config";
 
+@injectable()
 export class ProductController {
     private productService: IProductService;
 
-    constructor() {
-        this.productService = serviceLocator.get<IProductService>('IProductService');
+    constructor(@inject(TYPES.IProductService) productService: IProductService) {
+        this.productService = productService;
     }
 
     public getAllProducts = (_req: Request, res: Response): void => {

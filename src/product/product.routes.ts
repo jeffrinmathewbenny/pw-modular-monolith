@@ -1,5 +1,7 @@
 import { Router } from "express";
+import { container } from "../inversify.config";
 import { ProductController } from "./product.controller";
+
 
 export class ProductRoutes {
     public router: Router;
@@ -7,7 +9,7 @@ export class ProductRoutes {
 
     constructor() {
         this.router = Router();
-        this.productController = new ProductController();
+        this.productController = container.get<ProductController>(ProductController);
         this.initializeRoutes();
     }
 

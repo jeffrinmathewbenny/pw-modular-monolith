@@ -1,6 +1,8 @@
+import { injectable } from "inversify";
 import { ProductModel } from "./product.model";
 import { Product, IProductService } from '../core/types/product.types'
 
+@injectable()
 export class ProductService implements IProductService{
     private productModel: ProductModel;
 
