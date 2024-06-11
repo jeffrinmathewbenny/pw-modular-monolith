@@ -34,7 +34,6 @@ export class UserService implements IUserService {
 
     public getUserWithProductDetails(userId: number, productId: number): { user: User, product: Product | undefined } | undefined {
       const user = this.getUserById(userId);
-      console.log(user)
       if (!user) {
           return undefined
       }

@@ -7,8 +7,8 @@ import { UserService } from "../../user/user.service";
 class ServiceRegistry {
     public register(): void {
         const productService = new ProductService();
-        const userService = new UserService();
         serviceLocator.register<IProductService>('IProductService', productService);
+        const userService = new UserService();
         serviceLocator.register<IUserService>('IUserService', userService);
     }
   }
